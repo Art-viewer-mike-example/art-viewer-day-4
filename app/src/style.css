@@ -57,6 +57,13 @@ img {
   margin: 0 0 0.5rem;
 }
 
+#videos-container {
+  height: 35vh;
+  width: 25rem;
+  overflow-y: scroll;
+  border: 2px solid #ccc;
+}
+
 /* Util classes */
 .block {
   display: block;

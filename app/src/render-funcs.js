@@ -30,11 +30,18 @@ export const mainSetup = (mainEl) => {
       <h2>Paintings</h2>
       <div id="paintings-container"></div>
     </div>
+
+    <div id="videos">
+      <h2>A Little Music, Perhaps?</h2>
+      <div id="videos-container"></div>
+    </div>
   `;
 
   const paintingsContainer = document.getElementById('paintings-container');
   const searchForm = document.getElementById('search-form');
   const selectedPaintingModal = document.getElementById('selected-painting-modal');
+  const videosContainer = document.getElementById('videos-container');
+  addYoutubeVideos(videosContainer);
 
   return { searchForm, paintingsContainer, selectedPaintingModal };
 }
@@ -70,3 +77,18 @@ export const renderPaintings = (parentEl, artworks, artworkSize = 400) => {
     parentEl.append(cardEl);
   });
 };
+
+const addYoutubeVideos = (videosContainerEl) => {
+  const videoIds = ['p7dqmROKGIo', 'dwY7w0k3j2Y', 'tsbQA3apvGs', 'yBkrwst9M94', '7QtrcuKdnvM', 'XCBwOgTYFAI'];
+
+  videoIds.forEach((videoId) => {
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${videoId}`;
+    iframe.width = '100%';
+    iframe.setAttribute('tabindex', "0"); // this makes sure keyboards see the video (though it seems fine by default)
+    iframe.allowFullscreen = true;
+    iframe.title = 'YouTube video player';
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    videosContainerEl.append(iframe);
+  });
+}
