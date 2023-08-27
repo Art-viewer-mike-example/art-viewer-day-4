@@ -85,7 +85,7 @@ const addYoutubeVideos = (videosContainerEl) => {
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube.com/embed/${videoId}`;
     iframe.width = '100%';
-    iframe.setAttribute('tabindex', "0");
+    iframe.setAttribute('tabindex', "0"); // this makes sure keyboards see the video (though it seems fine by default)
     iframe.allowFullscreen = true;
     iframe.title = 'YouTube video player';
     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
