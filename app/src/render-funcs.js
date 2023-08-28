@@ -66,14 +66,10 @@ export const renderPaintings = (parentEl, artworks, artworkSize = 400) => {
     img.onerror = () => cardEl.remove();
     img.alt = title;
 
-    const button = document.createElement('button');
-    button.textContent = 'More Info';
-    button.setAttribute('aria-label', `Open modal with info on "${title}"`)
-    button.dataset.imageId = image_id;
-    button.dataset.title = title;
-    button.dataset.artworkId = id;
+    const openModalButton = createButton(title, image_id, id, 'More Info', 'open-modal-button', `Open modal with info on "${title}"`);
+    const addToFavoritesButton = createButton(title, image_id, id, 'Add to Favorites', 'add-to-favorites-button', `Add "${title}" to favorites`);
 
-    cardEl.append(h3, img, button);
+    cardEl.append(h3, img, openModalButton, addToFavoritesButton);
     parentEl.append(cardEl);
   });
 };
@@ -91,4 +87,17 @@ const addYoutubeVideos = (videosContainerEl) => {
     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
     videosContainerEl.append(iframe);
   });
+}
+
+const createButton = (title, imageId, artworkId, text, buttonClass, ariaLabel) => {
+  const addToFavoritesButton = document.createElement('button');
+
+  addToFavoritesButton.textContent = text;
+  addToFavoritesButton.classList.add(buttonClass);
+  addToFavoritesButton.setAttribute('aria-label', ariaLabel);
+  addToFavoritesButton.dataset.imageId = imageId;
+  addToFavoritesButton.dataset.title = title;
+  addToFavoritesButton.dataset.artworkId = artworkId;
+
+  return addToFavoritesButton;
 }
