@@ -32,7 +32,6 @@ export const clearFavoriteArtworks = () => {
 
 export const removeFavoriteArtwork = (givenId) => {
   const filteredArt = getFavoriteArtworks().filter(({ id })=> Number(id) !== Number(givenId));
-  console.log('filteredArt:', filteredArt);
   favoriteArtworks(filteredArt);
 }
 
