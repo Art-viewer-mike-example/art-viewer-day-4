@@ -3,6 +3,7 @@ import {
   handleSearchSubmit,
   handleOpenPaintingModalFromArtworks,
   handleModalBackdropClickToClose,
+  handleAddToFavorites,
 } from "./event-handlers";
 import { mainSetup, renderPaintings } from "./render-funcs";
 
@@ -14,5 +15,7 @@ export default async function app(mainEl) {
 
   searchForm.addEventListener('submit', handleSearchSubmit);
   paintingsContainer.addEventListener('click', handleOpenPaintingModalFromArtworks);
+  paintingsContainer.addEventListener('click', handleAddToFavorites)
   selectedPaintingModal.addEventListener('click', handleModalBackdropClickToClose);
+  selectedPaintingModal.addEventListener('click', handleAddToFavorites);
 }

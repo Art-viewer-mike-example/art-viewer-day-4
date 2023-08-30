@@ -1,5 +1,5 @@
 import { fetchAllArtByKeyword, fetchArtworkById } from "./fetch-funcs";
-import { renderPaintings } from "./render-funcs";
+import { renderPaintings, createButton } from "./render-funcs";
 
 export const handleSearchSubmit = async (e) => {
   e.preventDefault();
@@ -14,7 +14,7 @@ export const handleSearchSubmit = async (e) => {
 
 // TODO: after MVP launch, refactor this logic out to render functions
 export const handleOpenPaintingModalFromArtworks = async (e) => {
-  if (!e.target.matches('button')) return;
+  if (!e.target.matches('button.open-modal-button')) return;
   const selectedPaintingModal = document.querySelector('#selected-painting-modal')
   const paintingPreloadInfo = document.querySelector('#painting-preload-info');
   paintingPreloadInfo.innerHTML = '';
@@ -52,7 +52,9 @@ export const handleOpenPaintingModalFromArtworks = async (e) => {
     <p>Classifications: ${(classification_titles || []).join(', ')}</p>
     <p>Dimensions: ${dimensions}</p>
   `;
-  console.log('artworkInfo:', artworkInfo);
+
+  const addToFavoritesButton = createButton(title, imageId, artworkId, 'Add to Favorites', 'add-to-favorites-button', `Add "${title}" to favorites`);
+  paintingInfo.append(addToFavoritesButton);
 }
 
 export const handleModalBackdropClickToClose = (e) => {
@@ -70,4 +72,9 @@ export const handleModalBackdropClickToClose = (e) => {
   );
 
   if (clickedOutsideOfModal) selectedPaintingModal.close();
+}
+
+export const handleAddToFavorites = (e) => {
+  if (!e.target.matches('.add-to-favorites-button')) return;
+  console.log('e.target.dataset:', e.target.dataset);
 }

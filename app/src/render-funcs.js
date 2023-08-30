@@ -75,7 +75,7 @@ export const renderPaintings = (parentEl, artworks, artworkSize = 400) => {
 };
 
 const addYoutubeVideos = (videosContainerEl) => {
-  const videoIds = ['p7dqmROKGIo', 'dwY7w0k3j2Y', 'tsbQA3apvGs', 'yBkrwst9M94', '7QtrcuKdnvM', 'XCBwOgTYFAI'];
+  const videoIds = ['p7dqmROKGIo', 'dwY7w0k3j2Y', 'tsbQA3apvGs', 'nN3kXezpxro', 'yBkrwst9M94', '7QtrcuKdnvM', 'XCBwOgTYFAI'];
 
   videoIds.forEach((videoId) => {
     const iframe = document.createElement('iframe');
@@ -89,7 +89,7 @@ const addYoutubeVideos = (videosContainerEl) => {
   });
 }
 
-const createButton = (title, imageId, artworkId, text, buttonClass, ariaLabel) => {
+export const createButton = (title, imageId, artworkId, text, buttonClass, ariaLabel) => {
   const addToFavoritesButton = document.createElement('button');
 
   addToFavoritesButton.textContent = text;
