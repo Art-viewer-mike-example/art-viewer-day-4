@@ -74,7 +74,10 @@ export const renderPaintings = (parentEl, artworks, artworkSize = 400) => {
     img.alt = title;
 
     const openModalButton = createButton(title, image_id, id, 'More Info', 'open-modal-button', `Open modal with info on "${title}"`);
-    const addToFavoritesButton = createButton(title, image_id, id, 'Add to Favorites', 'add-to-favorites-button', `Add "${title}" to favorites`);
+    const favoriteButtonText =  parentEl.id === 'favorite-paintings-container' ? 'Remove from Favorites' : `Add to Favorites`;
+    const addToFavoritesButton = createButton(
+      title, image_id, id, favoriteButtonText, 'add-to-favorites-button', `Add "${title}" to favorites`
+    );
 
     cardEl.append(h3, img, openModalButton, addToFavoritesButton);
     parentEl.append(cardEl);
@@ -96,7 +99,7 @@ const addYoutubeVideos = (videosContainerEl) => {
   });
 }
 
-export const createButton = (title, image_id, artworkId, text, buttonClass, ariaLabel) => {
+export const createButton = (title, image_id, artworkId, text, buttonClass, ariaLabel, isFavorite = false) => {
   const addToFavoritesButton = document.createElement('button');
 
   addToFavoritesButton.textContent = text;
