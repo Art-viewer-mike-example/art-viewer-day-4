@@ -35,15 +35,22 @@ export const mainSetup = (mainEl) => {
       <h2>A Little Music, Perhaps?</h2>
       <div id="videos-container"></div>
     </div>
+
+    <div id="favorite-paintings">
+      <h2>Favorite Paintings</h2>
+      <div id="favorite-paintings-container"></div>
+    </div>
   `;
 
   const paintingsContainer = document.getElementById('paintings-container');
+  const favoritePaintingsContainer = document.getElementById('favorite-paintings-container');
   const searchForm = document.getElementById('search-form');
   const selectedPaintingModal = document.getElementById('selected-painting-modal');
   const videosContainer = document.getElementById('videos-container');
+
   addYoutubeVideos(videosContainer);
 
-  return { searchForm, paintingsContainer, selectedPaintingModal };
+  return { searchForm, paintingsContainer, selectedPaintingModal, favoritePaintingsContainer };
 }
 
 export const renderPaintings = (parentEl, artworks, artworkSize = 400) => {
