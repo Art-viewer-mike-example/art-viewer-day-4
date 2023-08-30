@@ -54,9 +54,7 @@ export const handleOpenPaintingModalFromArtworks = async (e) => {
     <p>Dimensions: ${dimensions}</p>
   `;
 
-  const isFavorite = isFavoriteArtwork(id);
-  console.log('isFavorite:', isFavorite);
-  const buttonText = isFavorite ? 'Remove from Favorites' : 'Add to Favorites';
+  const buttonText = isFavoriteArtwork(id) ? 'Remove from Favorites' : 'Add to Favorites';
   const addToFavoritesButton = createButton(title, image_id, id, buttonText, 'add-to-favorites-button', `Add "${title}" to favorites`);
   paintingInfo.append(addToFavoritesButton);
 }

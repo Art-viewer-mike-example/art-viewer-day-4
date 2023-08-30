@@ -1,3 +1,5 @@
+import { isFavoriteArtwork } from "./store";
+
 export const mainSetup = (mainEl) => {
   mainEl.innerHTML = `
     <h1>ArtViewer App</h1>
@@ -74,10 +76,9 @@ export const renderPaintings = (parentEl, artworks, artworkSize = 400) => {
     img.alt = title;
 
     const openModalButton = createButton(title, image_id, id, 'More Info', 'open-modal-button', `Open modal with info on "${title}"`);
-    const isFavoritePaintingsContainer = parentEl.id === 'favorite-paintings-container'
-    const favoriteButtonText = isFavoritePaintingsContainer ? 'Remove from Favorites' : `Add to Favorites`;
+    const favoriteButtonText = isFavoriteArtwork(id) ? 'Remove from Favorites' : `Add to Favorites`;
     const addToFavoritesButton = createButton(
-      title, image_id, id, favoriteButtonText, 'add-to-favorites-button', `Add "${title}" to favorites`, isFavoritePaintingsContainer
+      title, image_id, id, favoriteButtonText, 'add-to-favorites-button', `Add "${title}" to favorites`
     );
 
     cardEl.append(h3, img, openModalButton, addToFavoritesButton);
@@ -100,7 +101,7 @@ const addYoutubeVideos = (videosContainerEl) => {
   });
 }
 
-export const createButton = (title, image_id, id, text, buttonClass, ariaLabel, isFavorite = false) => {
+export const createButton = (title, image_id, id, text, buttonClass, ariaLabel) => {
   const addToFavoritesButton = document.createElement('button');
 
   addToFavoritesButton.textContent = text;
@@ -109,7 +110,6 @@ export const createButton = (title, image_id, id, text, buttonClass, ariaLabel, 
   addToFavoritesButton.dataset.image_id = image_id;
   addToFavoritesButton.dataset.title = title;
   addToFavoritesButton.dataset.id = id;
-  addToFavoritesButton.dataset.isFavorite = isFavorite;
 
   return addToFavoritesButton;
 }
