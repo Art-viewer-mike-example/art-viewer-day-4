@@ -89,13 +89,13 @@ const addYoutubeVideos = (videosContainerEl) => {
   });
 }
 
-export const createButton = (title, imageId, artworkId, text, buttonClass, ariaLabel) => {
+export const createButton = (title, image_id, artworkId, text, buttonClass, ariaLabel) => {
   const addToFavoritesButton = document.createElement('button');
 
   addToFavoritesButton.textContent = text;
   addToFavoritesButton.classList.add(buttonClass);
   addToFavoritesButton.setAttribute('aria-label', ariaLabel);
-  addToFavoritesButton.dataset.imageId = imageId;
+  addToFavoritesButton.dataset.image_id = image_id;
   addToFavoritesButton.dataset.title = title;
   addToFavoritesButton.dataset.artworkId = artworkId;
 

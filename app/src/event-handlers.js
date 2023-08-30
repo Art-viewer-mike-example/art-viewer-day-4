@@ -1,5 +1,6 @@
 import { fetchAllArtByKeyword, fetchArtworkById } from "./fetch-funcs";
 import { renderPaintings, createButton } from "./render-funcs";
+import { addSavedArtworks } from "./store";
 
 export const handleSearchSubmit = async (e) => {
   e.preventDefault();
@@ -19,13 +20,13 @@ export const handleOpenPaintingModalFromArtworks = async (e) => {
   const paintingPreloadInfo = document.querySelector('#painting-preload-info');
   paintingPreloadInfo.innerHTML = '';
 
-  const { imageId, artworkId, title } = e.target.dataset;
+  const { image_id, artworkId, title } = e.target.dataset;
   const titleEl = document.createElement('h2');
   titleEl.textContent = title;
   paintingPreloadInfo.append(titleEl);
 
   const img = document.createElement('img');
-  img.src = `https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`;
+  img.src = `https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg`;
   img.alt = title;
   img.onload = () => {
     paintingPreloadInfo.append(img);
@@ -53,7 +54,7 @@ export const handleOpenPaintingModalFromArtworks = async (e) => {
     <p>Dimensions: ${dimensions}</p>
   `;
 
-  const addToFavoritesButton = createButton(title, imageId, artworkId, 'Add to Favorites', 'add-to-favorites-button', `Add "${title}" to favorites`);
+  const addToFavoritesButton = createButton(title, image_id, artworkId, 'Add to Favorites', 'add-to-favorites-button', `Add "${title}" to favorites`);
   paintingInfo.append(addToFavoritesButton);
 }
 
@@ -76,5 +77,7 @@ export const handleModalBackdropClickToClose = (e) => {
 
 export const handleAddToFavorites = (e) => {
   if (!e.target.matches('.add-to-favorites-button')) return;
-  console.log('e.target.dataset:', e.target.dataset);
+  const {image_id, title, artworkId } = e.target.dataset;
+  console.log('{ image_id, title, artworkId }:', { image_id, title, artworkId });
+  addSavedArtworks({ image_id, title, artworkId });
 }
