@@ -64,6 +64,15 @@ img {
   border: 2px solid #ccc;
 }
 
+#favorite-paintings-container {
+  display: flex;
+  width: 100%;
+  max-width: 800px;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 /* Util classes */
 .block {
   display: block;
@@ -71,4 +80,10 @@ img {
 
 .center {
   margin: 1rem auto;
+}
+
+.flex-basic {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }

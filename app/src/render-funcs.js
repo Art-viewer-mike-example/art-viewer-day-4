@@ -1,3 +1,5 @@
+import { isFavoriteArtwork } from "./store";
+
 export const mainSetup = (mainEl) => {
   mainEl.innerHTML = `
     <h1>ArtViewer App</h1>
@@ -31,19 +33,28 @@ export const mainSetup = (mainEl) => {
       <div id="paintings-container"></div>
     </div>
 
-    <div id="videos">
-      <h2>A Little Music, Perhaps?</h2>
-      <div id="videos-container"></div>
+    <div class="flex-basic">
+      <div id="videos">
+        <h2>A Little Music, Perhaps?</h2>
+        <div id="videos-container"></div>
+      </div>
+
+      <div id="favorite-paintings">
+        <h2>Favorite Paintings</h2>
+        <div id="favorite-paintings-container"></div>
+      </div>
     </div>
   `;
 
   const paintingsContainer = document.getElementById('paintings-container');
+  const favoritePaintingsContainer = document.getElementById('favorite-paintings-container');
   const searchForm = document.getElementById('search-form');
   const selectedPaintingModal = document.getElementById('selected-painting-modal');
   const videosContainer = document.getElementById('videos-container');
+
   addYoutubeVideos(videosContainer);
 
-  return { searchForm, paintingsContainer, selectedPaintingModal };
+  return { searchForm, paintingsContainer, selectedPaintingModal, favoritePaintingsContainer };
 }
 
 export const renderPaintings = (parentEl, artworks, artworkSize = 400) => {
@@ -66,20 +77,19 @@ export const renderPaintings = (parentEl, artworks, artworkSize = 400) => {
     img.onerror = () => cardEl.remove();
     img.alt = title;
 
-    const button = document.createElement('button');
-    button.textContent = 'More Info';
-    button.setAttribute('aria-label', `Open modal with info on "${title}"`)
-    button.dataset.imageId = image_id;
-    button.dataset.title = title;
-    button.dataset.artworkId = id;
+    const openModalButton = createButton(title, image_id, id, 'More Info', 'open-modal-button', `Open modal with info on "${title}"`);
+    const favoriteButtonText = isFavoriteArtwork(id) ? 'Remove from Favorites' : `Add to Favorites`;
+    const toggleFavoriteButton = createButton(
+      title, image_id, id, favoriteButtonText, 'add-to-favorites-button', `Add "${title}" to favorites`
+    );
 
-    cardEl.append(h3, img, button);
+    cardEl.append(h3, img, openModalButton, toggleFavoriteButton);
     parentEl.append(cardEl);
   });
 };
 
 const addYoutubeVideos = (videosContainerEl) => {
-  const videoIds = ['p7dqmROKGIo', 'dwY7w0k3j2Y', 'tsbQA3apvGs', 'yBkrwst9M94', '7QtrcuKdnvM', 'XCBwOgTYFAI'];
+  const videoIds = ['p7dqmROKGIo', 'dwY7w0k3j2Y', 'tsbQA3apvGs', 'nN3kXezpxro', 'yBkrwst9M94', '7QtrcuKdnvM', 'XCBwOgTYFAI'];
 
   videoIds.forEach((videoId) => {
     const iframe = document.createElement('iframe');
@@ -91,4 +101,17 @@ const addYoutubeVideos = (videosContainerEl) => {
     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
     videosContainerEl.append(iframe);
   });
+}
+
+export const createButton = (title, image_id, id, text, buttonClass, ariaLabel) => {
+  const toggleFavoriteButton = document.createElement('button');
+
+  toggleFavoriteButton.textContent = text;
+  toggleFavoriteButton.classList.add(buttonClass);
+  toggleFavoriteButton.setAttribute('aria-label', ariaLabel);
+  toggleFavoriteButton.dataset.image_id = image_id;
+  toggleFavoriteButton.dataset.title = title;
+  toggleFavoriteButton.dataset.id = id;
+
+  return toggleFavoriteButton;
 }
