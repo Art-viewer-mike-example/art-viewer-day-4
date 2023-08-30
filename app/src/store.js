@@ -25,3 +25,7 @@ export const getSavedArtworks = () => {
 export const addSavedArtworks = (artwork) => {
   saveArtworks([...getSavedArtworks(), artwork]);
 }
+
+export const clearSavedArtworks = () => {
+  localStorage.setItem('artworks', '[]');
+};
