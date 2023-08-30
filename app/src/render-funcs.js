@@ -74,9 +74,10 @@ export const renderPaintings = (parentEl, artworks, artworkSize = 400) => {
     img.alt = title;
 
     const openModalButton = createButton(title, image_id, id, 'More Info', 'open-modal-button', `Open modal with info on "${title}"`);
-    const favoriteButtonText =  parentEl.id === 'favorite-paintings-container' ? 'Remove from Favorites' : `Add to Favorites`;
+    const isFavoritePaintingsContainer = parentEl.id === 'favorite-paintings-container'
+    const favoriteButtonText = isFavoritePaintingsContainer ? 'Remove from Favorites' : `Add to Favorites`;
     const addToFavoritesButton = createButton(
-      title, image_id, id, favoriteButtonText, 'add-to-favorites-button', `Add "${title}" to favorites`
+      title, image_id, id, favoriteButtonText, 'add-to-favorites-button', `Add "${title}" to favorites`, isFavoritePaintingsContainer
     );
 
     cardEl.append(h3, img, openModalButton, addToFavoritesButton);
@@ -99,7 +100,7 @@ const addYoutubeVideos = (videosContainerEl) => {
   });
 }
 
-export const createButton = (title, image_id, artworkId, text, buttonClass, ariaLabel, isFavorite = false) => {
+export const createButton = (title, image_id, id, text, buttonClass, ariaLabel, isFavorite = false) => {
   const addToFavoritesButton = document.createElement('button');
 
   addToFavoritesButton.textContent = text;
@@ -107,7 +108,8 @@ export const createButton = (title, image_id, artworkId, text, buttonClass, aria
   addToFavoritesButton.setAttribute('aria-label', ariaLabel);
   addToFavoritesButton.dataset.image_id = image_id;
   addToFavoritesButton.dataset.title = title;
-  addToFavoritesButton.dataset.artworkId = artworkId;
+  addToFavoritesButton.dataset.id = id;
+  addToFavoritesButton.dataset.isFavorite = isFavorite;
 
   return addToFavoritesButton;
 }

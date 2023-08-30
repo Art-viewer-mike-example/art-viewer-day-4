@@ -7,7 +7,7 @@ const getStoreData = (key) => {
   }
 };
 
-const saveArtworks = (artworks) => {
+const favoriteArtworks = (artworks) => {
   localStorage.setItem('artworks', JSON.stringify(artworks));
 };
 
@@ -17,15 +17,25 @@ const saveArtworks = (artworks) => {
 //   title: 'Village Among the Trees',
 // };
 
-export const getSavedArtworks = () => {
+export const getFavoriteArtworks = () => {
   const artworks = getStoreData('artworks')
   return (artworks) ? artworks : [];
 };
 
-export const addSavedArtworks = (artwork) => {
-  saveArtworks([...getSavedArtworks(), artwork]);
+export const addFavoriteArtwork = (artwork) => {
+  favoriteArtworks([...getFavoriteArtworks(), artwork]);
 }
 
-export const clearSavedArtworks = () => {
+export const clearFavoriteArtworks = () => {
   localStorage.setItem('artworks', '[]');
 };
+
+export const removeFavoriteArtwork = (givenId) => {
+  const filteredArt = getFavoriteArtworks().filter(({ id })=> Number(id) !== Number(givenId));
+  console.log('filteredArt:', filteredArt);
+  favoriteArtworks(filteredArt);
+}
+
+export const isFavoriteArtwork = (id) => {
+  return !!getFavoriteArtworks().find(({ id: favId }) => Number(favId) === Number(id));
+}
