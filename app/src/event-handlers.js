@@ -55,8 +55,8 @@ export const handleOpenPaintingModalFromArtworks = async (e) => {
   `;
 
   const buttonText = isFavoriteArtwork(id) ? 'Remove from Favorites' : 'Add to Favorites';
-  const addToFavoritesButton = createButton(title, image_id, id, buttonText, 'add-to-favorites-button', `Add "${title}" to favorites`);
-  paintingInfo.append(addToFavoritesButton);
+  const toggleFavoriteButton = createButton(title, image_id, id, buttonText, 'add-to-favorites-button', `Add "${title}" to favorites`);
+  paintingInfo.append(toggleFavoriteButton);
 }
 
 export const handleModalBackdropClickToClose = (e) => {
