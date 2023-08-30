@@ -33,14 +33,16 @@ export const mainSetup = (mainEl) => {
       <div id="paintings-container"></div>
     </div>
 
-    <div id="videos">
-      <h2>A Little Music, Perhaps?</h2>
-      <div id="videos-container"></div>
-    </div>
+    <div class="flex-basic">
+      <div id="videos">
+        <h2>A Little Music, Perhaps?</h2>
+        <div id="videos-container"></div>
+      </div>
 
-    <div id="favorite-paintings">
-      <h2>Favorite Paintings</h2>
-      <div id="favorite-paintings-container"></div>
+      <div id="favorite-paintings">
+        <h2>Favorite Paintings</h2>
+        <div id="favorite-paintings-container"></div>
+      </div>
     </div>
   `;
 
